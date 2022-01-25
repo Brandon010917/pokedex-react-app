@@ -1,23 +1,13 @@
-import logo from './logo.svg';
-import './App.css';
+//Redux
+import { useSelector } from "react-redux";
 
 function App() {
+  //Redux-hooks
+  const userName = useSelector((state) => state.userName);
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <h1>{userName}</h1>
     </div>
   );
 }
