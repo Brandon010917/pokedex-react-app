@@ -1,0 +1,157 @@
+/* Start Colors */
+.rock {
+  background-color: #5d5c66;
+}
+.rock-80 {
+  background-color: #4f4e55;
+}
+.ghost {
+  background-color: #70559b;
+}
+.ghost-80 {
+  background-color: #7f60af;
+}
+.steel {
+  background-color: #b7b9d0;
+}
+.steel-80 {
+  background-color: #c0c3e4;
+}
+.water {
+  background-color: #5ba3b7;
+}
+.water-80 {
+  background-color: #6db3c4;
+}
+.grass {
+  background-color: #92d1b4;
+}
+.grass-80 {
+  background-color: #79af9a;
+}
+.psychic {
+  background-color: #fb5584;
+}
+.psychic-80 {
+  background-color: #ff628f;
+}
+.ice {
+  background-color: #9ad6df;
+}
+.ice-80 {
+  background-color: #a7e0e9;
+}
+.dark {
+  background-color: #75574c;
+}
+.dark-80 {
+  background-color: #816358;
+}
+.fairy {
+  background-color: #ad7fae;
+}
+.fairy-80 {
+  background-color: #b5959f;
+}
+.normal {
+  background-color: #aa7c40;
+}
+.normal-80 {
+  background-color: #c89f6a;
+}
+.fighting {
+  background-color: #c12239;
+}
+.fighting-80 {
+  background-color: #d62f48;
+}
+.flying {
+  background-color: #a891ec;
+}
+.flying-80 {
+  background-color: #b19cf0;
+}
+.poison {
+  background-color: #89607f;
+}
+.poison-80 {
+  background-color: #a57f9e;
+}
+.ground {
+  background-color: #e7d05f;
+}
+.ground-80 {
+  background-color: #afa450;
+}
+.bug {
+  background-color: #7dad3f;
+}
+.bug-80 {
+  background-color: #91c949;
+}
+.fire {
+  background-color: #ef8a7e;
+}
+.fire-80 {
+  background-color: #e6796b;
+}
+.electric {
+  background-color: #e7cf77;
+}
+.electric-80 {
+  background-color: #f6e585;
+}
+.dragon {
+  background-color: #d19f64;
+}
+.dragon-80 {
+  background-color: #f2b46c;
+}
+
+/* End Colors */
+
+/* Pokedex */
+.pokeball-background {
+  position: fixed;
+  top: -30px;
+  right: 50px;
+  filter: opacity(0.2);
+  /* animation: rotation 6s infinite ease; */
+}
+
+/* @keyframes rotation {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+} */
+
+.user-form {
+  background-image: url(./assets/images/background-pokemon.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: 65% center;
+}
+
+.pokemon-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
+  justify-content: center;
+}
+
+@media screen and (min-width: 768px) {
+  .pokemon-container {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+  }
+}
+
+.pokemon-image {
+  background-image: url(./assets/images/pokeball-white.svg);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
