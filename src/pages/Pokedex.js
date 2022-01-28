@@ -34,6 +34,7 @@ const Pokedex = () => {
 
   useEffect(() => {
     setPokemonsList(pokemons);
+    setPage(1);
   }, [pokemons]);
 
   useEffect(() => {

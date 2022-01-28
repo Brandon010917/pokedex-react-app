@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
 
 //Animated
-import { Animated as Animation } from "react-animated-css";
+import { Animated } from "react-animated-css";
 
 //Redux
 import { useDispatch, useSelector } from "react-redux";
@@ -50,6 +50,11 @@ const PokemonInfo = () => {
   useEffect(() => {
     const urlName = "https://pokeapi.co/api/v2/pokemon-species/" + nameOrId;
     axios.get(urlName).then(({ data }) => setPokemonNameJp(data.names[0].name));
+
+    const urlLocation = `https://pokeapi.co/api/v2/pokemon/${nameOrId}/encounters`;
+    axios
+      .get(urlLocation)
+      .then(({ data }) => setLocationArea(data[0].location_area.name));
   }, [nameOrId]);
 
   const renderId =
@@ -94,7 +99,7 @@ const PokemonInfo = () => {
             {/* Columna de Información */}
 
             <div className="col-span-12 md:col-span-3 flex flex-col h-full relative">
-              <Animation
+              <Animated
                 animationIn="slideInLeft"
                 animationInDuration={2000}
                 isVisible={true}
@@ -117,15 +122,18 @@ const PokemonInfo = () => {
                     <span className="text-sm">kg</span>
                   </p>
                   <p className="absolute bottom-10 -left-10 -rotate-90">
-                    Región: <span className="text-sm">{locationArea}</span>
+                    Región:{" "}
+                    <span className="text-sm">
+                      {locationArea.replace(/-/g, " ")}
+                    </span>
                   </p>
                 </div>
-              </Animation>
+              </Animated>
             </div>
 
             {/* Columna de la imagen y el nombre en Japones */}
             <div className="col-span-12 md:col-span-5 flex flex-col justify-center text-center">
-              <Animation
+              <Animated
                 animationIn="slideInDown"
                 animationInDuration={2000}
                 isVisible={true}
@@ -144,11 +152,11 @@ const PokemonInfo = () => {
                   </p>
                 </div>
                 <p></p>
-              </Animation>
+              </Animated>
             </div>
             {/* Columna de estadísticas */}
             <div className="col-span-12 md:col-span-4 mt-10">
-              <Animation
+              <Animated
                 animationIn="slideInRight"
                 animationInDuration={2000}
                 isVisible={true}
@@ -159,17 +167,17 @@ const PokemonInfo = () => {
                 <ul className="flex flex-wrap gap-3 justify-center">
                   {renderStats()}
                 </ul>
-              </Animation>
+              </Animated>
             </div>
 
             <div className="hidden col-span-12 md:block mt-10">
-              <Animation
+              <Animated
                 animationIn="slideInUp"
                 animationInDuration={2000}
                 isVisible={true}
               >
                 <SearchNav />
-              </Animation>
+              </Animated>
             </div>
           </div>
         )
