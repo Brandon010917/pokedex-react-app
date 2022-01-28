@@ -3,4 +3,5 @@ export const actions = {
   setPokemons: "SET_POKEMONS",
   setPokemonsTypes: "SET_POKEMONS_TYPES",
   filterByTypePokemons: "FILTER_BY_TYPE_POKEMONS",
+  setIsLoading: "SET_IS_LOADING",
 };

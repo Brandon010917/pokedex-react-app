@@ -41,27 +41,22 @@ const PokemonSearch = ({ type, placeholder }) => {
       ? navigate(`../pokedex/${pokemonNameOrId}`)
       : navigate(pokemonNameOrId);
 
-    console.log(nameOrId);
-
     setpokemonNameOrId("");
   };
 
   return (
     <form
       onSubmit={handlesubmit}
-      className="flex justify-center max-w-xs gap-4 h-12 text-black"
+      className="text-gray-700 flex justify-center gap-4 max-w-xs h-12 text-sm"
     >
       <input
         type={type}
-        className="w-full px-3 py-1.5 h-full bg-white rounded text-base"
+        className="bg-gray-100 w-full h-full px-3 py-1.5 rounded "
         placeholder={placeholder}
         value={pokemonNameOrId}
         onChange={({ target }) => setpokemonNameOrId(target.value)}
       />
-      <button
-        type="submit"
-        className="px-3 py-1.5 h-full bg-white rounded text-base"
-      >
+      <button type="submit" className="bg-gray-100 px-4 py-1.5 h-full rounded ">
         Go!
       </button>
     </form>

@@ -5,6 +5,7 @@ import axios from "axios";
 
 //React-router-dom
 import { Link } from "react-router-dom";
+import PokemonTypeBtn from "./PokemonTypeBtn";
 
 const PokemonsList = ({ url }) => {
   //State
@@ -27,10 +28,10 @@ const PokemonsList = ({ url }) => {
       {pokemonInfo && (
         <Link
           to={pokemonInfo.name}
-          className={`p-3 rounded-lg grid grid-cols-2 ${pokemonInfo.types[0].type.name} shadow-2xl cursor-pointer text-white`}
+          className={`${pokemonInfo.types[0].type.name} text-white grid grid-cols-2 p-3 rounded-lg shadow-2xl md:cursor-pointer md:hover:scale-110 md:transition-transform md:duration-500`}
         >
-          <div className="col-span-full flex items-center justify-between mb-3">
-            <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">
+          <div className="col-span-full flex justify-between items-center mb-3">
+            <h1 className="font-bold text-xl sm:text-2xl md:text-3xl">
               {pokemonInfo.name}
             </h1>
             <p className="font-bold text-sm">{renderId}</p>
@@ -38,12 +39,11 @@ const PokemonsList = ({ url }) => {
 
           <div>
             {pokemonInfo.types.map(({ type }) => (
-              <button
+              <PokemonTypeBtn
                 key={type.name}
-                className={`block text-sm sm:text-base rounded font-semibold px-3 py-1.5 h-9 mb-1 ${pokemonInfo.types[0].type.name}-80`}
-              >
-                {type.name}
-              </button>
+                bgColor={pokemonInfo.types[0].type.name}
+                name={type.name}
+              />
             ))}
           </div>
 

@@ -1,13 +1,19 @@
+import { useEffect, useState } from "react";
+
 //Logo
 import pokeball from "../assets/images/pokeball-black.svg";
 
 //Redux
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+
+//Actions
+import { getPokemonsThunk } from "../redux/actions";
 
 //Components
-import PokemonCard from "./PokemonCard";
-import SearchNav from "./SearchNav";
-import { useEffect, useState } from "react";
+import PokemonCard from "../components/Pokedex/PokemonCard";
+import SearchNav from "../components/Custom/SearchNav";
+import Loader from "../components/Custom/Loader";
+
 import axios from "axios";
 
 const Pokedex = () => {
@@ -18,6 +24,13 @@ const Pokedex = () => {
   //Redux-hooks
   const pokemons = useSelector((state) => state.pokemons);
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
+  const isLoading = useSelector((state) => state.isLoading);
+  const dispatch = useDispatch();
+
+  //Effect
+  useEffect(() => {
+    dispatch(getPokemonsThunk());
+  }, [dispatch]);
 
   useEffect(() => {
     setPokemonsList(pokemons);
@@ -52,28 +65,32 @@ const Pokedex = () => {
   );
 
   return (
-    <main className="bg-gray-200 overflow-x-hidden min-h-screen">
+    <main className="pokedex overflow-x-hidden min-h-screen pb-10">
       {/* Image Pokeball Background */}
       <img src={pokeball} alt="Pokeball" className="pokeball-background z-20" />
 
-      <div className="container mx-auto p-4 pokedex z-30 relative">
+      <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
         <div className="flex items-center gap-2 mb-8">
-          <img src={pokeball} alt="Pokeball" className="w-7 h-7" />
-          <h1 className="text-5xl font-bold">Pokédex</h1>
+          <img src={pokeball} alt="Pokeball" className="w-7 h-7 opacity-10" />
+          <h1 className="text-5xl font-bold text-gray-300">Pokédex</h1>
         </div>
 
         {/* Search and Filter Pokemon */}
         <SearchNav />
 
         {/* Render Pokemons */}
-        <section className="pokemon-container gap-3">
-          {paginatedPokemons.map((pokemon) => (
-            <PokemonCard
-              key={pokemon.url ? pokemon.url : pokemon.pokemon.url}
-              url={pokemon.url ? pokemon.url : pokemon.pokemon.url}
-            />
-          ))}
+        <section className="pokemon-container relative grid justify-center gap-4 z-30">
+          {isLoading ? (
+            <Loader />
+          ) : (
+            paginatedPokemons.map((pokemon) => (
+              <PokemonCard
+                key={pokemon.url || pokemon.pokemon.url}
+                url={pokemon.url || pokemon.pokemon.url}
+              />
+            ))
+          )}
         </section>
       </div>
     </main>

@@ -1,7 +1,7 @@
 //Redux
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByTypePokemons } from "../redux/actions";
+import { filterByTypePokemons } from "../../redux/actions";
 
 const SelectFilter = () => {
   //State
@@ -29,7 +29,7 @@ const SelectFilter = () => {
   return (
     <div className="h-12">
       <select
-        className="w-full px-3 py-1.5 h-full bg-white rounded text-base"
+        className="bg-gray-100 text-gray-800 w-full h-full px-3 py-1.5 font-medium text-sm rounded"
         value={selectType}
         onChange={({ target }) => handleChange(target.value)}
       >

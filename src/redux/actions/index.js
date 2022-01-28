@@ -21,12 +21,19 @@ export const filterByTypePokemons = (type) => ({
   payload: type,
 });
 
+export const setIsLoading = (isLoading) => ({
+  type: actions.setIsLoading,
+  payload: isLoading,
+});
+
 // Thunks
 export const getPokemonsThunk = () => {
   return (dispatch) => {
+    dispatch(setIsLoading(true));
     axios
       .get("https://pokeapi.co/api/v2/pokemon?limit=898&offset=0")
-      .then(({ data }) => dispatch(setPokemons(data.results)));
+      .then(({ data }) => dispatch(setPokemons(data.results)))
+      .finally(() => dispatch(setIsLoading(false)));
 
     axios
       .get("https://pokeapi.co/api/v2/type")

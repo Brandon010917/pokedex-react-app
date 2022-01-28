@@ -111,37 +111,55 @@
 /* End Colors */
 
 /* Pokedex */
+.pokedex {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    324deg,
+    rgba(255, 255, 255, 1) 10%,
+    rgba(243, 67, 61, 1) 100%
+  );
+}
+
 .pokeball-background {
   position: fixed;
   top: -30px;
   right: 50px;
   filter: opacity(0.2);
-  /* animation: rotation 6s infinite ease; */
+  animation: rotation 3s linear 0s infinite;
 }
 
-/* @keyframes rotation {
+@keyframes rotation {
   0% {
     transform: rotate(0);
+    top: -30px;
+  }
+  25% {
+    top: -20px;
   }
   50% {
-    transform: rotate(180deg);
+    top: 0;
+  }
+  75% {
+    top: -20px;
   }
   100% {
     transform: rotate(360deg);
+    top: -30px;
   }
-} */
+}
 
 .user-form {
-  background-image: url(./assets/images/background-pokemon.png);
+  background-image: url(./assets/images/background-pokemon.png),
+    linear-gradient(324deg, #ffffff 10%, rgba(243, 67, 61, 1) 100%);
   background-repeat: no-repeat;
   background-size: cover;
   background-position: 65% center;
+  background-color: rgb(255, 255, 255);
 }
 
 .pokemon-container {
-  display: grid;
+  min-height: 500px;
   grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
-  justify-content: center;
 }
 
 @media screen and (min-width: 768px) {

@@ -5,6 +5,7 @@ const INITIAL_STATE = {
   pokemons: [],
   pokemonsTypes: [],
   pokemonsFiltered: [],
+  isLoading: false,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -40,6 +41,11 @@ const reducer = (state = INITIAL_STATE, action) => {
         pokemonsFiltered: state.pokemonsTypes.filter(
           (type) => type.name === action.payload
         ),
+      };
+    case actions.setIsLoading:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
 
     default:
