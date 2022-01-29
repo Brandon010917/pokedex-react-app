@@ -47,7 +47,7 @@ const PokemonSearch = ({ type, placeholder }) => {
   return (
     <form
       onSubmit={handlesubmit}
-      className="text-gray-700 flex justify-center gap-4 max-w-xs h-12 text-sm"
+      className="text-gray-700 flex justify-center gap-4 max-w-xs mx-auto h-12 text-sm"
     >
       <input
         type={type}

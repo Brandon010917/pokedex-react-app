@@ -26,6 +26,24 @@ export const setIsLoading = (isLoading) => ({
   payload: isLoading,
 });
 
+export const resetPokemonsFiltered = () => ({
+  type: actions.resetPokemonsFiltered,
+});
+
+export const setIndexPokemons = (index) => ({
+  type: actions.setIndexPokemons,
+  payload: index,
+});
+
+export const setPage = (page) => ({
+  type: actions.setPage,
+  payload: page,
+});
+
+export const resetPage = () => ({
+  type: actions.resetPage,
+});
+
 // Thunks
 export const getPokemonsThunk = () => {
   return (dispatch) => {

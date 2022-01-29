@@ -1,7 +1,7 @@
 //Redux
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { filterByTypePokemons } from "../../redux/actions";
+import { filterByTypePokemons, resetPage } from "../../redux/actions";
 
 const SelectFilter = () => {
   //State
@@ -24,6 +24,7 @@ const SelectFilter = () => {
   const handleChange = (type) => {
     setSelectType(type);
     dispatch(filterByTypePokemons(type));
+    dispatch(resetPage());
   };
 
   return (

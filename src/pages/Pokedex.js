@@ -3,38 +3,44 @@ import { useEffect, useState } from "react";
 //Logo
 import pokeball from "../assets/images/pokeball-black.svg";
 
+//Axios
+import axios from "axios";
+
 //Redux
 import { useDispatch, useSelector } from "react-redux";
 
 //Actions
-import { getPokemonsThunk } from "../redux/actions";
+import { getPokemonsThunk, resetPokemonsFiltered } from "../redux/actions";
 
 //Components
 import PokemonCard from "../components/Pokedex/PokemonCard";
 import SearchNav from "../components/Custom/SearchNav";
 import Loader from "../components/Custom/Loader";
 
-import axios from "axios";
-
 const Pokedex = () => {
   //State
   const [pokemonsList, setPokemonsList] = useState([]);
-  const [page, setPage] = useState(1);
 
   //Redux-hooks
   const pokemons = useSelector((state) => state.pokemons);
   const pokemonsFiltered = useSelector((state) => state.pokemonsFiltered);
   const isLoading = useSelector((state) => state.isLoading);
+  const firstIndexPokemons = useSelector((state) => state.firstIndexPokemons);
+  const lastIndexPokemons = useSelector((state) => state.lastIndexPokemons);
+
   const dispatch = useDispatch();
 
   //Effect
   useEffect(() => {
     dispatch(getPokemonsThunk());
+
+    return () => {
+      dispatch(resetPokemonsFiltered());
+    };
   }, [dispatch]);
 
   useEffect(() => {
     setPokemonsList(pokemons);
-    setPage(1);
   }, [pokemons]);
 
   useEffect(() => {
@@ -46,19 +52,6 @@ const Pokedex = () => {
       setPokemonsList(pokemonsFiltered);
     }
   }, [pokemonsFiltered]);
-
-  //Paginated
-  let pokemonsPerPage = 16;
-  let totalPages = Math.ceil(pokemonsList?.length / pokemonsPerPage);
-
-  let pages = [];
-
-  for (let i = 1; i <= totalPages; i++) {
-    pages.push(i);
-  }
-
-  let lastIndexPokemons = page * pokemonsPerPage;
-  let firstIndexPokemons = lastIndexPokemons - pokemonsPerPage;
 
   const paginatedPokemons = pokemonsList?.slice(
     firstIndexPokemons,
@@ -72,8 +65,7 @@ const Pokedex = () => {
 
       <div className="max-w-7xl mx-auto p-4">
         {/* Header */}
-        <div className="flex items-center gap-2 mb-8">
-          <img src={pokeball} alt="Pokeball" className="w-7 h-7 opacity-10" />
+        <div className="mb-8">
           <h1 className="text-5xl font-bold text-gray-300">Pokédex</h1>
         </div>
 
@@ -93,6 +85,9 @@ const Pokedex = () => {
             ))
           )}
         </section>
+
+        {/* Paginated */}
+        {/* <PokemonsPaginated pokemonsList={pokemonsList} /> */}
       </div>
     </main>
   );

@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 
-//Icons
+//Icons & Logo
 import { ArrowCircleLeftIcon } from "@heroicons/react/solid";
+import Logo from "../assets/images/pokemon-logo.png";
 
 //Animated
 import { Animated } from "react-animated-css";
@@ -19,9 +20,12 @@ import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
 
 //Components
-import StatsPokemon from "../components/PokemonInfo/StatsPokemon";
+import PokemonStats from "../components/PokemonInfo/PokemonStats";
 import SearchNav from "../components/Custom/SearchNav";
 import Loader from "../components/Custom/Loader";
+import PokemonFeatures from "../components/PokemonInfo/PokemonFeatures";
+import PokemonTitle from "../components/PokemonInfo/PokemonTitle";
+import PokemonLocation from "../components/PokemonInfo/PokemonLocation";
 
 const PokemonInfo = () => {
   //State
@@ -54,7 +58,7 @@ const PokemonInfo = () => {
     const urlLocation = `https://pokeapi.co/api/v2/pokemon/${nameOrId}/encounters`;
     axios
       .get(urlLocation)
-      .then(({ data }) => setLocationArea(data[0].location_area.name));
+      .then(({ data }) => setLocationArea(data[0]?.location_area?.name));
   }, [nameOrId]);
 
   const renderId =
@@ -70,12 +74,6 @@ const PokemonInfo = () => {
     stat.base_stat,
   ]);
 
-  const renderStats = () => {
-    return stats?.map((stat) => (
-      <StatsPokemon key={stat[0]} statName={stat[0]} statBase={stat[1]} />
-    ));
-  };
-
   const prevPage = () => navigate("../pokedex");
 
   return (
@@ -86,95 +84,85 @@ const PokemonInfo = () => {
         <Loader />
       ) : (
         pokemonInfo && (
-          <div className="container mx-auto grid grid-cols-1 md:grid-cols-12 px-4">
+          <div className="grid grid-cols-1 md:grid-cols-12 max-w-7xl mx-auto px-4">
             {/* Boton para regresar*/}
-            <div className="col-span-12">
-              <button
-                onClick={prevPage}
-                className="bg-gray-100 text-black shadow-lg rounded px-3 py-1.5 h-9 flex items-center opacity-70"
-              >
-                <ArrowCircleLeftIcon className="ml-auto w-8 h-8 text-dark-gray" />
+            <div className="col-span-full flex justify-between items-center md:mb-6">
+              <button onClick={prevPage} className="flex items-center h-9">
+                <ArrowCircleLeftIcon className="w-10 h-10 text-ligth-gray" />
               </button>
+              <img
+                src={Logo}
+                alt="Pokemon Logo"
+                className="max-w-xs w-40 md:w-full"
+              />
             </div>
             {/* Columna de Información */}
+            <div className="md:col-span-3 flex flex-col h-full relative">
+              <Animated animationIn="slideInLeft" animationInDuration={2000}>
+                <PokemonTitle name={pokemonInfo.name} id={renderId} />
 
-            <div className="col-span-12 md:col-span-3 flex flex-col h-full relative">
-              <Animated
-                animationIn="slideInLeft"
-                animationInDuration={2000}
-                isVisible={true}
-              >
-                <div className="font-extrabold mt-16">
-                  <h2 className="text-xl mb-2">{renderId}</h2>
-                  <h1 className="text-4xl first-letter:uppercase mb-2">
-                    {pokemonInfo.name}
-                  </h1>
+                <div className="mt-10 lg:mt-20 mb-2 ml-16 lg:ml-20 pt-12">
+                  <PokemonFeatures
+                    name="Height"
+                    feature={pokemonInfo.height}
+                    measure="m"
+                  />
+                  <PokemonFeatures
+                    name="Weigth"
+                    feature={pokemonInfo.weight}
+                    measure="kg"
+                  />
                 </div>
-                <div className="mt-10 mb-2 pt-12 ml-16">
-                  <p>
-                    Height:
-                    {" " + pokemonInfo.height / 10}
-                    <span className="text-base">m</span>
-                  </p>
-                  <p>
-                    Weigth:
-                    {" " + pokemonInfo.weight / 10}
-                    <span className="text-sm">kg</span>
-                  </p>
-                  <p className="absolute bottom-10 -left-10 -rotate-90">
-                    Región:{" "}
-                    <span className="text-sm">
-                      {locationArea.replace(/-/g, " ")}
-                    </span>
-                  </p>
-                </div>
+
+                <PokemonLocation locationArea={locationArea} />
               </Animated>
             </div>
-
             {/* Columna de la imagen y el nombre en Japones */}
-            <div className="col-span-12 md:col-span-5 flex flex-col justify-center text-center">
-              <Animated
-                animationIn="slideInDown"
-                animationInDuration={2000}
-                isVisible={true}
-              >
-                <div className="relative">
+            <div className="md:col-span-5 flex flex-col items-center lg:items-center text-center lg:text-left relative">
+              <div className="">
+                <Animated
+                  animationIn="slideInDown"
+                  animationInDuration={2000}
+                  isVisible={true}
+                >
                   <img
                     src={
                       pokemonInfo.sprites.other["official-artwork"]
                         .front_default
                     }
                     alt={pokemonInfo.name}
-                    className="mt-10 mb-16 ml-10"
+                    className="max-w-xs lg:max-w-sm md:mt-10 ml-12 lg:m-4"
+                   
                   />
-                  <p className="text-6xl lg:text-7xl font-semibold text-black text-opacity-30">
-                    {pokemonNameJp}
-                  </p>
-                </div>
-                <p></p>
-              </Animated>
+                </Animated>
+
+                <p className="text-black font-semibold text-6xl lg:text-7xl text-opacity-20 lg:absolute lg:top-20 lg:-left-40">
+                  {pokemonNameJp}
+                </p>
+              </div>
             </div>
             {/* Columna de estadísticas */}
-            <div className="col-span-12 md:col-span-4 mt-10">
+            <div className="md:col-span-4 mt-10">
               <Animated
                 animationIn="slideInRight"
                 animationInDuration={2000}
                 isVisible={true}
               >
-                <h3 className="mb-8 text-3xl font-bold text-center">
+                <h3 className="mb-6 font-bold text-3xl text-center">
                   Base stats:
                 </h3>
-                <ul className="flex flex-wrap gap-3 justify-center">
-                  {renderStats()}
+                <ul className="flex justify-center flex-wrap gap-3">
+                  <PokemonStats stats={stats} />
                 </ul>
               </Animated>
             </div>
 
-            <div className="hidden col-span-12 md:block mt-10">
+            <div className="hidden col-span-full md:block mt-10 lg:mt-10">
               <Animated
                 animationIn="slideInUp"
                 animationInDuration={2000}
                 isVisible={true}
+                animationInDelay={500}
               >
                 <SearchNav />
               </Animated>

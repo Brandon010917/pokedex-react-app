@@ -6,6 +6,10 @@ const INITIAL_STATE = {
   pokemonsTypes: [],
   pokemonsFiltered: [],
   isLoading: false,
+  page: 1,
+  pokemonsPerPage: 16,
+  firstIndexPokemons: 0,
+  lastIndexPokemons: 16,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -46,6 +50,31 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         isLoading: action.payload,
+      };
+
+    case actions.resetPokemonsFiltered:
+      return {
+        ...state,
+        pokemonsFiltered: state.pokemons,
+      };
+
+    case actions.setIndexPokemons:
+      return {
+        ...state,
+        firstIndexPokemons: action.payload.firstIndexPokemons,
+        lastIndexPokemons: action.payload.lastIndexPokemons,
+      };
+
+    case actions.setPage:
+      return {
+        ...state,
+        page: action.payload,
+      };
+
+    case actions.resetPage:
+      return {
+        ...state,
+        page: 1,
       };
 
     default:

@@ -96,10 +96,10 @@
   background-color: #e6796b;
 }
 .electric {
-  background-color: #e7cf77;
+  background-color: #c7af57;
 }
 .electric-80 {
-  background-color: #f6e585;
+  background-color: #d3ba61;
 }
 .dragon {
   background-color: #d19f64;
@@ -122,30 +122,10 @@
 
 .pokeball-background {
   position: fixed;
-  top: -30px;
+  top: 50px;
   right: 50px;
   filter: opacity(0.2);
-  animation: rotation 3s linear 0s infinite;
-}
-
-@keyframes rotation {
-  0% {
-    transform: rotate(0);
-    top: -30px;
-  }
-  25% {
-    top: -20px;
-  }
-  50% {
-    top: 0;
-  }
-  75% {
-    top: -20px;
-  }
-  100% {
-    transform: rotate(360deg);
-    top: -30px;
-  }
+  transform: scale(1.4) rotate(45deg);
 }
 
 .user-form {
@@ -159,12 +139,12 @@
 
 .pokemon-container {
   min-height: 500px;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 220px));
+  grid-template-columns: repeat(auto-fit, minmax(190px, 210px));
 }
 
 @media screen and (min-width: 768px) {
   .pokemon-container {
-    grid-template-columns: repeat(auto-fit, minmax(250px, 300px));
+    grid-template-columns: repeat(auto-fit, minmax(240px, 290px));
   }
 }
 
