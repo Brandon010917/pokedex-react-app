@@ -1,7 +1,7 @@
 import "./App.css";
 
 //React-router-dom
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { HashRouter, Routes, Route, Navigate } from "react-router-dom";
 
 //Pages
 import { Pokedex, PokemonInfo, UserName } from "./pages";
@@ -18,7 +18,7 @@ function App() {
   const isLoading = useSelector((state) => state.isLoading);
 
   return (
-    <BrowserRouter>
+    <HashRouter>
       {isLoading && <Loader />}
 
       <Routes>
@@ -30,7 +30,7 @@ function App() {
           <Route path="*" element={<Navigate to="/pokedex" />} />
         </Route>
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
