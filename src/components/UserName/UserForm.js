@@ -28,7 +28,7 @@ const UserForm = () => {
     if (!name) return;
 
     dispatch(setUserName(name));
-    navigate("/pokedex");
+    navigate("/#/pokedex");
   };
 
   return (
