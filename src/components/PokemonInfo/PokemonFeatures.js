@@ -1,6 +1,6 @@
 const PokemonFeatures = ({ name, feature, measure }) => {
   return (
-    <p>
+    <p className="text-md">
       <span>
         {name}: {feature / 10}
       </span>

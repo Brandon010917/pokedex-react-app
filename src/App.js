@@ -8,10 +8,19 @@ import { Pokedex, PokemonInfo, UserName } from "./pages";
 
 //Components
 import ProtectedRoutes from "./components/ProtectedRoutes";
+import Loader from "./components/Custom/Loader";
+
+//Redux
+import { useSelector } from "react-redux";
 
 function App() {
+  //Redux-hooks
+  const isLoading = useSelector((state) => state.isLoading);
+
   return (
     <BrowserRouter>
+      {isLoading && <Loader />}
+
       <Routes>
         <Route path="/" element={<UserName />} />
         {/* Protected Routes */}

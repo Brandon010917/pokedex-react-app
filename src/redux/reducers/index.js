@@ -5,11 +5,12 @@ const INITIAL_STATE = {
   pokemons: [],
   pokemonsTypes: [],
   pokemonsFiltered: [],
+  pokemonInfo: null,
+  pokemonNameJP: "",
+  pokemonLocation: "",
   isLoading: false,
   page: 1,
   pokemonsPerPage: 16,
-  firstIndexPokemons: 0,
-  lastIndexPokemons: 16,
 };
 
 const reducer = (state = INITIAL_STATE, action) => {
@@ -20,6 +21,7 @@ const reducer = (state = INITIAL_STATE, action) => {
         ...state,
         userName: name,
       };
+
     case actions.setPokemons:
       return {
         ...state,
@@ -46,6 +48,25 @@ const reducer = (state = INITIAL_STATE, action) => {
           (type) => type.name === action.payload
         ),
       };
+
+    case actions.setPokemonInfo:
+      return {
+        ...state,
+        pokemonInfo: action.payload,
+      };
+
+    case actions.setPokemonNameJP:
+      return {
+        ...state,
+        pokemonNameJP: action.payload,
+      };
+
+    case actions.setPokemonLocation:
+      return {
+        ...state,
+        pokemonLocation: action.payload,
+      };
+
     case actions.setIsLoading:
       return {
         ...state,
@@ -56,13 +77,6 @@ const reducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         pokemonsFiltered: state.pokemons,
-      };
-
-    case actions.setIndexPokemons:
-      return {
-        ...state,
-        firstIndexPokemons: action.payload.firstIndexPokemons,
-        lastIndexPokemons: action.payload.lastIndexPokemons,
       };
 
     case actions.setPage:

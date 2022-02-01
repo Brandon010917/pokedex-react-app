@@ -17,11 +17,11 @@ const PokemonsList = ({ url }) => {
   }, [url]);
 
   const renderId =
-    pokemonInfo?.id >= 10 && pokemonInfo?.id < 100
+    pokemonInfo?.id <= 9
+      ? `#00${pokemonInfo?.id}`
+      : pokemonInfo?.id >= 10 && pokemonInfo?.id < 100
       ? `#0${pokemonInfo?.id}`
-      : pokemonInfo?.id >= 100
-      ? `#${pokemonInfo?.id}`
-      : `#00${pokemonInfo?.id}`;
+      : `#${pokemonInfo?.id}`;
 
   return (
     <>

@@ -34,9 +34,9 @@ const UserForm = () => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-gray-100 text-gray-800 w-full p-5 rounded-2xl shadow-md"
+      className="bg-gray-100 text-gray-600 w-full p-5 rounded-2xl shadow-md"
     >
-      <label htmlFor="userName" className="block font-medium text-lg">
+      <label htmlFor="userName" className="block font-bold text-lg">
         Hello Trainer!! Enter your name to start
       </label>
 
